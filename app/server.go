@@ -29,6 +29,7 @@ func main() {
 			fmt.Println("Error reading from connection: ", err.Error())
 			os.Exit(1)
 		}
+
 		fmt.Println(numBytes)
 		fmt.Println(readBytes)
 		c.Write([]byte("+PONG\r\n"))
