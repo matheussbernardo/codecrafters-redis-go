@@ -16,13 +16,18 @@ func main() {
 		os.Exit(1)
 	}
 
-	c, err := l.Accept()
-	if err != nil {
-		fmt.Println("Error accepting connection: ", err.Error())
-		os.Exit(1)
+	for {
+		c, err := l.Accept()
+		if err != nil {
+			fmt.Println("Error accepting connection: ", err.Error())
+			os.Exit(1)
+		}
+		go answerPong(c)
 	}
+}
 
-	for true {
+func answerPong(c net.Conn) {
+	for {
 		readBytes := make([]byte, 512)
 		numBytes, err := c.Read(readBytes)
 		if err != nil {
